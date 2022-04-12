@@ -4,7 +4,8 @@ E.g.:
 
 $ git checkout <repo>
 $ cd <repo>
-$ while ! kustomize build custom/ | kubectl apply -f; do echo "Waiting to complete..."; sleep 5; done
+$ git checkout c1
+$ while ! kustomize build custom/ | kubectl apply -f -; do echo "Waiting to complete..."; sleep 5; done
 
 After installation is complete, an update needs to be done to the minio secret:
 
@@ -13,4 +14,5 @@ $ kubectl -n kubeflow create secret generic mlpipeline-minio-artifact \
   --dry-run=client \
   --output yaml \
   --from-literal=accesskey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.AccessKey}') \
-  --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.SecretKey}')
+  --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.SecretKey}') \
+  | kubectl apply -f -
