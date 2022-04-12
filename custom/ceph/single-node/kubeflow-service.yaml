@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kubeflow
+  name: minio-service
+spec:
+  type: ExternalName
+  externalName: rook-ceph-rgw-single-node.rook-ceph.svc.cluster.local

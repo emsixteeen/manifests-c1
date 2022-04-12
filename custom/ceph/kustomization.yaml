@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- upstream/rook-ceph
+
+resources:
+- single-node/cluster.yaml
+- single-node/object-store.yaml
+- single-node/object-user.yaml
+- single-node/kubeflow-service.yaml
