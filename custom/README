@@ -1,0 +1,16 @@
+Install as ordinary Kubeflow, but instead of using "kustomize build | kubectl apply -f examples/", replace "example/" with "custom/".
+
+E.g.: 
+
+$ git checkout <repo>
+$ cd <repo>
+$ while ! kustomize build custom/ | kubectl apply -f; do echo "Waiting to complete..."; sleep 5; done
+
+After installation is complete, an update needs to be done to the minio secret:
+
+$ kubectl -n kubeflow create secret generic mlpipeline-minio-artifact \
+  --save-config \
+  --dry-run=client \
+  --output yaml \
+  --from-literal=accesskey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.AccessKey}') \
+  --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.SecretKey}')
