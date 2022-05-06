@@ -8,4 +8,3 @@ resources:
 - single-node/cluster.yaml
 - single-node/object-store.yaml
 - single-node/object-user.yaml
-- single-node/kubeflow-service.yaml

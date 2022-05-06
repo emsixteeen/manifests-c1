@@ -5,4 +5,4 @@ metadata:
   name: minio-service
 spec:
   type: ExternalName
-  externalName: rook-ceph-rgw-single-node.rook-ceph.svc.cluster.local
+  externalName: rook-ceph-rgw-minio.rook-ceph.svc.cluster.local
