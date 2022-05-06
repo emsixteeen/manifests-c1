@@ -4,4 +4,4 @@ metadata:
   name: minio
   namespace: rook-ceph
 spec:
-  store: single-node
+  store: minio

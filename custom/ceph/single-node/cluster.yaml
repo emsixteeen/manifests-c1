@@ -19,7 +19,7 @@ data:
 apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
-  name: single-node
+  name: minio
   namespace: rook-ceph # namespace:cluster
 spec:
   dataDirHostPath: /var/lib/rook
