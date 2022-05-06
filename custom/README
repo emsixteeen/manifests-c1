@@ -13,6 +13,6 @@ $ kubectl -n kubeflow create secret generic mlpipeline-minio-artifact \
   --save-config \
   --dry-run=client \
   --output yaml \
-  --from-literal=accesskey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.AccessKey}') \
-  --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-single-node-minio -o jsonpath='{.data.SecretKey}') \
+  --from-literal=accesskey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-minio-minio -o jsonpath='{.data.AccessKey}' | base64 -d) \
+  --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-minio-minio -o jsonpath='{.data.SecretKey}' | base64 -d) \
   | kubectl apply -f -
