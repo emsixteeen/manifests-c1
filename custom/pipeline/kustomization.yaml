@@ -18,6 +18,10 @@ resources:
 commonLabels:
   application-crd-id: kubeflow-pipelines
 
+patches:
+  - path: patch-ml-pipeline-ui.yaml
+  - path: patch-ml-pipeline.yaml
+
 # !!! If you want to customize the namespace,
 # please also update base/cache-deployer/cluster-scoped/cache-deployer-clusterrolebinding.yaml
 namespace: kubeflow
