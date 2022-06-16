@@ -22,6 +22,7 @@ patches:
   - path: patch-ml-pipeline-ui.yaml
   - path: patch-ml-pipeline.yaml
   - path: patch-artifact.yaml
+  - path: patch-pipelines-profile-controller.yaml
 
 configMapGenerator:
 - name: kubeflow-pipelines-profile-controller-code
