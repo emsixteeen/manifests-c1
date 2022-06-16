@@ -11,3 +11,5 @@ spec:
           env:
           - name: MINIO_HOST
             value: rook-ceph-rgw-minio.rook-ceph.svc.cluster.local
+          - name: MINIO_PORT
+            value: "80"
