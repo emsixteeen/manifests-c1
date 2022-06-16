@@ -23,6 +23,12 @@ patches:
   - path: patch-ml-pipeline.yaml
   - path: patch-artifact.yaml
 
+configMapGenerator:
+- name: kubeflow-pipelines-profile-controller-code
+  behavior: replace
+  files:
+  - pipelines-profile-controller/sync.py
+
 # !!! If you want to customize the namespace,
 # please also update base/cache-deployer/cluster-scoped/cache-deployer-clusterrolebinding.yaml
 namespace: kubeflow
