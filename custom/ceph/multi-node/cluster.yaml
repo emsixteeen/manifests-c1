@@ -1,0 +1,45 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rook-config-override
+  namespace: rook-ceph # namespace:cluster
+data:
+  config: |
+    [global]
+    #auth_cluster_required = none
+    #auth_service_required = none
+    #auth_client_required = none
+    #ms_bind_ipv4 = false
+    #ms_bind_ipv6 = true
+---
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: minio
+  namespace: rook-ceph # namespace:cluster
+spec:
+  dataDirHostPath: /var/lib/rook
+  cephVersion:
+    image: quay.io/ceph/ceph:v16.2.7
+    allowUnsupported: true
+  mon:
+    count: 3
+    allowMultiplePerNode: false
+  mgr:
+    count: 3
+    allowMultiplePerNode: false
+  dashboard:
+    enabled: true
+  crashCollector:
+    disable: false
+  storage:
+    useAllNodes: true
+    useAllDevices: true
+    #deviceFilter:
+  healthCheck:
+    daemonHealth:
+      mon:
+        interval: 45s
+        timeout: 600s
+  disruptionManagement:
+    managePodBudgets: true
