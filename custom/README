@@ -7,6 +7,8 @@ $ cd <repo>
 $ git checkout c1
 $ while ! kustomize build custom/ | kubectl apply -f -; do echo "Waiting to complete..."; sleep 5; done
 
+NOTE: to change the Ceph cluster from a single-node to a multi-node cluster, edit the ceph/kustomization.yaml file, and change the bases from single-node/ to multi-node/.
+
 After a while, all pods in the rook-ceph namespace will be running, but in the kubeflow namespace there will be some with a CrashLookBackoff, or similar.
 
 Once ther pods in the rook-ceph namespace are all running, an update needs to be made to the minio secret in the kubeflow namespace, to get the pods in the kubeflow namespace running.
