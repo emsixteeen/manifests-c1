@@ -24,3 +24,15 @@ $ kubectl -n kubeflow create secret generic mlpipeline-minio-artifact \
   --from-literal=accesskey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-minio-minio -o jsonpath='{.data.AccessKey}' | base64 -d) \
   --from-literal=secretkey=$(kubectl -n rook-ceph get secret rook-ceph-object-user-minio-minio -o jsonpath='{.data.SecretKey}' | base64 -d) \
   | kubectl apply -f -
+
+NOTE: At this point, the Kubeflow Pipeline Controller may have already started, however it may be running with an empty or incorrect secret. As such, access in the Artifact UI will not work. To correct this issue, the following steps are required:
+
+* Restart the Kubeflow Pipelines Profile Controller in the Kubeflow namespace by executing:
+  $ kubectl -n kubeflow rollout restart deployment/kubeflow-pipelines-profile-controller
+
+* Delete the MinIO Secret, Pipline UI Artifact and Pipeline Visualization Deployments in the example namespace, by executing:
+  $ kubectl -n kubeflow-user-example-com delete secret mlpipeline-minio-artifact
+  $ kubectl -n kubeflow-user-example-com delete deployment ml-pipeline-visualizationserver
+  $ kubectl -n kubeflow-user-example-com delete deployment ml-pipeline-ui-artifact
+
+At this point, the secret and deployments should automatically be re-deployed by the Pipeline Profile Controller with the correct credentials.
