@@ -1,3 +1,5 @@
+IMPORTANT: Ensure that on ALL nodes the directory /var/lib/rook does not exist and/or is empty. If it is not, Ceph will NOT work correctly. Prior to running any of the installation steps below, it is imperative that the directory /var/lib/rook does not exist or is empty on ALL nodes, or installation will fail.
+
 Install as ordinary Kubeflow, but instead of using "kustomize build | kubectl apply -f examples/", replace "example/" with "custom/".
 
 E.g.: 
