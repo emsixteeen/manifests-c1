@@ -39,7 +39,7 @@ spec:
   storage:
     useAllNodes: true
     useAllDevices: true
-    #deviceFilter:
+    devicePathFilter: /dev/mapper/vg00-ceph_osd
   healthCheck:
     daemonHealth:
       mon:
